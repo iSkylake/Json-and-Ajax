@@ -20,7 +20,19 @@ btn.addEventListener('click', function(){
 function renderHTML(data){
 	var htmlString = "";
 	data.forEach(function(pet){
-		htmlString += "<p>" + pet.name + "is a " + pet.species + "</p>";
+		htmlString += "<p>" + pet.name + "is a " + pet.species + " and likes ";
+		for(i=0; i<pet.foods.likes.length; i++){
+			if(i === 0){
+				htmlString += pet.foods.likes[i] + " ";
+			} else{
+				htmlString += " and " + pet.foods.likes[i];
+			}
+		};
+		htmlString += " and dislikes "
+		pet.foods.dislikes.forEach(function(dislike){
+			htmlString += dislike + " ";
+		});
+		htmlString += "</p>";
 	});
 	animalContainer.insertAdjacentHTML('beforeend', htmlString);
 }
