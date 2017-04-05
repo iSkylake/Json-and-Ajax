@@ -19,4 +19,22 @@ $(function(){
 			}
 		});
 	});
+
+	// POST, ADD TASK
+	$('#create-form').on('submit', function(e){
+		e.preventDefault();
+
+		var taskInput = $('#task-input');
+
+		$.ajax({
+			url: '/tasks',
+			method: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify({task: taskInput.val()}),
+			success: function(res){
+				taskInput.val('');
+				$('#get-btn').click();
+			}
+		});
+	});
 });

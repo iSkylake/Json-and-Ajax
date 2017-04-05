@@ -24,6 +24,17 @@ app.get('/tasks', function(req, res){
 	res.send({todos: todos});
 });
 
+app.post('/tasks', function(req, res){
+	var newTask = req.body.task;
+	currentId++;
+
+	todos.push({
+		id: currentId,
+		task: newTask
+	});
+	res.send('Successfully added task!');
+});
+
 app.listen(PORT, function(){
 	console.log("Server listening on PORT: " + PORT);
 });
