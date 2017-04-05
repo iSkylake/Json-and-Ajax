@@ -7,16 +7,22 @@ var PORT = process.env.PORT || 3000;
 var todos = [
 	{
 		id: 1,
-		name: 'Eat food'
+		task: 'Eat food'
 	},
 	{
 		id: 2,
-		name: 'Take a bath'
+		task: 'Take a bath'
 	}
 ];
 
+var currentId = 2;
+
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
+
+app.get('/tasks', function(req, res){
+	res.send({todos: todos});
+});
 
 app.listen(PORT, function(){
 	console.log("Server listening on PORT: " + PORT);
