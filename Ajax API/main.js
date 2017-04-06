@@ -12,7 +12,9 @@ $(function(){
 				res.todos.forEach(function(todo){
 					taskTable.append('\
 						<tr>\
-							<td class="name">' + todo.task + '</td>\
+							<td class="id" style="display:none">' +todo.id + '</td>\
+							<td class="task">' + todo.task + '</td>\
+							<td><button class="delete">Delete</button> </td>\
 						</tr>\
 					');
 				});
@@ -33,6 +35,20 @@ $(function(){
 			data: JSON.stringify({task: taskInput.val()}),
 			success: function(res){
 				taskInput.val('');
+				$('#get-btn').click();
+			}
+		});
+	});
+
+	$('table').on('click', '.delete', function(){
+		var row = $(this).closest('tr');
+		var taskName = row.find('.task').text();
+
+		$.ajax({
+			url: '/tasks/' + taskName,
+			method: 'DELETE',
+			contentType: 'application/json',
+			success: function(res){
 				$('#get-btn').click();
 			}
 		});

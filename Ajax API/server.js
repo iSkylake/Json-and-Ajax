@@ -35,6 +35,19 @@ app.post('/tasks', function(req, res){
 	res.send('Successfully added task!');
 });
 
+app.delete('/tasks/:task', function(req, res){
+	var taskName = req.params.task;
+	console.log(taskName);
+	var found = false;
+
+	todos.forEach(function(todo, index){
+		if(!found && todo.task === taskName){
+			todos.splice(index, 1);
+		}
+	});
+	res.send('Successfully deleted task!');
+});
+
 app.listen(PORT, function(){
 	console.log("Server listening on PORT: " + PORT);
 });
