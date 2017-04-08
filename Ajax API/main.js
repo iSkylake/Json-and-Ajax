@@ -42,10 +42,10 @@ $(function(){
 
 	$('table').on('click', '.delete', function(){
 		var row = $(this).closest('tr');
-		var taskName = row.find('.task').text();
+		var id = row.find('.id').text();
 
 		$.ajax({
-			url: '/tasks/' + taskName,
+			url: '/tasks/' + id,
 			method: 'DELETE',
 			contentType: 'application/json',
 			success: function(res){

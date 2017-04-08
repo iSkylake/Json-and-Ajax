@@ -35,13 +35,12 @@ app.post('/tasks', function(req, res){
 	res.send('Successfully added task!');
 });
 
-app.delete('/tasks/:task', function(req, res){
-	var taskName = req.params.task;
-	console.log(taskName);
+app.delete('/tasks/:id', function(req, res){
+	var id = req.params.id;
 	var found = false;
 
 	todos.forEach(function(todo, index){
-		if(!found && todo.task === taskName){
+		if(!found && todo.id === Number(id)){
 			todos.splice(index, 1);
 		}
 	});
