@@ -28,16 +28,18 @@ $(function(){
 
 		var taskInput = $('#task-input');
 
-		$.ajax({
-			url: '/tasks',
-			method: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify({task: taskInput.val()}),
-			success: function(res){
-				taskInput.val('');
-				getTodo();
-			}
-		});
+		if(taskInput.val().length > 0){
+			$.ajax({
+				url: '/tasks',
+				method: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify({task: taskInput.val()}),
+				success: function(res){
+					taskInput.val('');
+					getTodo();
+				}
+			});
+		}
 	});
 
 	$('table').on('click', '.delete', function(){
