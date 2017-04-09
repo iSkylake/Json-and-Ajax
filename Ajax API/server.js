@@ -1,21 +1,23 @@
 var express = require('express'),
 	app = express(),
-	bodyParser = require('body-parser');
+	bodyParser = require('body-parser'),
+	uuidV1 = require('uuid/v1');
 
 var PORT = process.env.PORT || 3000;
 
+var id1 = uuidV1();
+var id2 = uuidV1();
+
 var todos = [
 	{
-		id: 1,
+		id: id1,
 		task: 'Eat food'
 	},
 	{
-		id: 2,
+		id: id2,
 		task: 'Take a bath'
 	}
 ];
-
-var currentId = 2;
 
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
@@ -26,10 +28,10 @@ app.get('/tasks', function(req, res){
 
 app.post('/tasks', function(req, res){
 	var newTask = req.body.task;
-	currentId++;
+	var genId = uuidV1();
 
 	todos.push({
-		id: currentId,
+		id: genId,
 		task: newTask
 	});
 	res.send('Successfully added task!');
@@ -40,7 +42,8 @@ app.delete('/tasks/:id', function(req, res){
 	var found = false;
 
 	todos.forEach(function(todo, index){
-		if(!found && todo.id === Number(id)){
+		if(!found && todo.id === id){
+			console.log(id);
 			todos.splice(index, 1);
 		}
 	});

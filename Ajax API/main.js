@@ -42,6 +42,7 @@ $(function(){
 		}
 	});
 
+	// DELETE TASK
 	$('table').on('click', '.delete', function(){
 		var row = $(this).closest('tr');
 		var id = row.find('.id').text();
