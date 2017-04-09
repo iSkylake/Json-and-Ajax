@@ -1,6 +1,6 @@
 $(function(){
 	// GET, SHOW TASKS
-	$('#get-btn').on('click', function(){
+	function getTodo(){
 		$.ajax({
 			url: '/tasks',
 			contentType: 'application/json',
@@ -20,7 +20,7 @@ $(function(){
 				});
 			}
 		});
-	});
+	};
 
 	// POST, ADD TASK
 	$('#create-form').on('submit', function(e){
@@ -35,7 +35,7 @@ $(function(){
 			data: JSON.stringify({task: taskInput.val()}),
 			success: function(res){
 				taskInput.val('');
-				$('#get-btn').click();
+				getTodo();
 			}
 		});
 	});
@@ -49,8 +49,10 @@ $(function(){
 			method: 'DELETE',
 			contentType: 'application/json',
 			success: function(res){
-				$('#get-btn').click();
+				getTodo();
 			}
 		});
 	});
+
+	getTodo();
 });
